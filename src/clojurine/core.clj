@@ -2,16 +2,20 @@
   (:gen-class))
 
 (defn filter-non-letter [x]
+  "Filter words removing characters which aren't letter, uses Java's isLetter"
   (filter #(Character/isLetter %) x))
 
 (defn apply-str [l]
+  "Lazy-seq of chars to string"
   (apply str l))
 
 (defn mung [w]
+  "mung the word to produce a key, alphabetaical"
+;;Todo all to lowercase
   (apply-str (sort w)))
 
 (defn -main
-  "I don't do a whole lot ... yet."
+  "Find anigrams"
   [& args]
   (def mungm  (loop [mungm {}
                      keys (->> args
