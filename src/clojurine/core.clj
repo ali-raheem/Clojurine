@@ -14,12 +14,10 @@
 ;;Todo all to lowercase
   (apply-str (sort w)))
 
-(defn -main
-  "Find anigrams"
-  [& args]
-  (def mungm  (loop [mungm {}
-                     keys (->> args
-                               first
+(defn mung-map
+  [wordlist]
+  (loop [mungm {}
+                     keys (->> wordlist
                                slurp
                                clojure.string/split-lines 
                                (map filter-non-letter)
@@ -30,4 +28,9 @@
                          (assoc mungm (mung key) key))
                        (rest keys))
                     )))
-  (println (map second  (filter #(= (mung (second args)) (first %)) mungm))))
+
+(defn -main
+  "Find anigrams"
+  [& args]
+  (let [mungm (mung-map (first args))]
+    (println (map second  (filter #(= (mung (second args)) (first %)) mungm)))))
