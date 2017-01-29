@@ -5,7 +5,7 @@ A simple port of my anigramer/margarine program which helps solve countdown conu
 ## Installation
 
 ```
-git clone URL
+git clone git@github.com:wolfmankurd/Clojurine.git
 ```
 
 ### Dependencies
