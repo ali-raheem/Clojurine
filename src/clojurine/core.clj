@@ -14,23 +14,32 @@
 ;;Todo all to lowercase
   (apply-str (sort w)))
 
+(defn get-words
+  [wordfile]
+  (->> wordfile
+       slurp
+       clojure.string/split-lines))
+
 (defn mung-map
   [wordlist]
   (loop [mungm {}
-                     keys (->> wordlist
-                               slurp
-                               clojure.string/split-lines 
-                               (map filter-non-letter)
-                               (map apply-str))]
-                (if (empty? keys) mungm
-                    (recur
-                       (let [key (first keys)]
-                         (assoc mungm (mung key) key))
-                       (rest keys))
-                    )))
+         keys (->> wordlist
+                   (map filter-non-letter)
+                   (map apply-str))]
+    (if (empty? keys) mungm
+        (recur
+         (let [key (first keys)]
+           (assoc mungm (mung key) key))
+         (rest keys)))))
 
 (defn -main
   "Find anigrams"
   [& args]
-  (let [mungm (mung-map (first args))]
-    (println (map second  (filter #(= (mung (second args)) (first %)) mungm)))))
+  (let [mungm (->> (first args)
+                   get-words
+                   mung-map)
+        key (mung (second args))]
+    (->> mungm
+         (filter #(= key (first %)))
+         (map second)
+         println)))
