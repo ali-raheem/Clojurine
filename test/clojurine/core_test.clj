@@ -2,6 +2,22 @@
   (:require [clojure.test :refer :all]
             [clojurine.core :refer :all]))
 
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+(deftest filter-non-letter-test
+  (testing "filter-non-letter"
+    (is (= '(\A \l \i) (filter-non-letter "Ali555%")))))
+
+(deftest apply-str-test
+  (testing "apply-str"
+    (is (= (apply-str '(\A \l \i))  "Ali"))))
+
+(deftest mung-test
+  (testing "mung"
+    (is (= "Ail" (mung "Ali")))))
+
+(deftest filter-non-letter-test
+  (testing "filter-non-letter"
+    (is (= '(\A \l \i) (filter-non-letter "Ali555%")))))
+
+(deftest find-match-test
+  (testing "find-match"
+    (is (=  ((find-match "Ali") [] "Ali") ["Ali"]))))
