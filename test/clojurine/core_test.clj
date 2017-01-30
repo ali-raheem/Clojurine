@@ -21,3 +21,7 @@
 (deftest find-match-test
   (testing "find-match"
     (is (=  ((find-match "Ali") [] "Ali") ["Ali"]))))
+
+(deftest find-match-case-test
+  (testing "find-match case-test"
+    (is (=  ((find-match "ila") [] "Ali") ["Ali"]))))
