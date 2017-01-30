@@ -15,13 +15,13 @@ Java, unfortunately.
 ## Usage
 
 ```
-java -jar clojurine-0.1.0-standalone.jar wordlist word
+java -jar clojurine-VERSION-standalone.jar wordlist word
 ```
 
 ## Examples
 
 ```
-java -jar clojurine-0.1.0-standalone.jar words anigrammer
+java -jar clojurine-0.2.0-standalone.jar words anigrammer
 ```
 
 ### Bugs
