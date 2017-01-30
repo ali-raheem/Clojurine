@@ -8,14 +8,18 @@
 
 (defn apply-str
   "Lazy-seq of chars to string"
-  [l]
-  (apply str l))
+  [lazy-chars]
+  (apply str lazy-chars))
 
 (defn mung
   "mung the word to produce a key, alphabetaical"
   [w]
 ;;Todo all to lowercase
-  (.toLowerCase (apply-str (sort w))))
+  (->> w
+       sort
+       apply-str
+       .toLowerCase
+       ))
 
 (defn get-words
   "Read wordlist into vector."
@@ -28,7 +32,10 @@
   "Returns function which takes vector and test word add if match."
   [word]
   (let [munged-word (mung word)] 
-    (fn [matches match-word] (if (= munged-word (mung match-word)) (conj matches match-word) matches))))
+    (fn [matches match-word]
+      (if (= munged-word (mung match-word))
+        (conj matches match-word)
+        matches))))
 
 (defn -main
   "Find anigrams first argument wordfile second argument letters"

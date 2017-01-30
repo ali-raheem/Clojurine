@@ -21,7 +21,7 @@ java -jar clojurine-VERSION-standalone.jar wordlist word
 ## Examples
 
 ```
-java -jar clojurine-0.3.0-standalone.jar words anigrammer
+java -jar clojurine-0.3.1-standalone.jar words anigrammer
 ```
 
 ### Bugs
