@@ -21,12 +21,11 @@ java -jar clojurine-VERSION-standalone.jar wordlist word
 ## Examples
 
 ```
-java -jar clojurine-0.2.0-standalone.jar words anigrammer
+java -jar clojurine-0.2.1-standalone.jar words anigrammer
 ```
 
 ### Bugs
 
-* Return more than one match
 * Ignore case in mung
 
 

@@ -1,4 +1,5 @@
--class))
+(ns clojurine.core
+  (:gen-class))
 
 (defn filter-non-letter [x]
   "Filter words removing characters which aren't letter, uses Java's isLetter"
