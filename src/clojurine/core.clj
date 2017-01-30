@@ -1,5 +1,4 @@
-(ns clojurine.core
-  (:gen-class))
+-class))
 
 (defn filter-non-letter [x]
   "Filter words removing characters which aren't letter, uses Java's isLetter"
@@ -15,31 +14,24 @@
   (apply-str (sort w)))
 
 (defn get-words
+  "Read wordlist into vector."
   [wordfile]
   (->> wordfile
        slurp
        clojure.string/split-lines))
 
-(defn mung-map
-  [wordlist]
-  (loop [mungm {}
-         keys (->> wordlist
-                   (map filter-non-letter)
-                   (map apply-str))]
-    (if (empty? keys) mungm
-        (recur
-         (let [key (first keys)]
-           (assoc mungm (mung key) key))
-         (rest keys)))))
+(defn find-match
+  "Returns function which takes vector and test word add if match."
+  [word]
+  (let [mword (mung word)] 
+    #(if (= mword (mung %2)) (conj % %2) %)))
 
 (defn -main
   "Find anigrams"
   [& args]
-  (let [mungm (->> (first args)
-                   get-words
-                   mung-map)
-        key (mung (second args))]
-    (->> mungm
-         (filter #(= key (first %)))
-         (map second)
-         println)))
+  (println (let [key (second args)
+                 wordfile (first args)
+                 words (get-words wordfile)
+                 matches []
+                 matcher (find-match key)]
+             (reduce matcher matches words))))
