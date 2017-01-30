@@ -1,5 +1,5 @@
-(defproject clojurine "0.2.1-SNAPSHOT"
-  :description "anigram finder"
+(defproject clojurine "0.2.2-SNAPSHOT"
+  :description "Anigram finder"
   :url "https://github.com/wolfmankurd/Clojurine"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}

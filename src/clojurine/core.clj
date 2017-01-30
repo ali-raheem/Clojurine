@@ -1,16 +1,19 @@
 (ns clojurine.core
   (:gen-class))
 
-(defn filter-non-letter [x]
+(defn filter-non-letter
   "Filter words removing characters which aren't letter, uses Java's isLetter"
+  [x]
   (filter #(Character/isLetter %) x))
 
-(defn apply-str [l]
+(defn apply-str
   "Lazy-seq of chars to string"
+  [l]
   (apply str l))
 
-(defn mung [w]
+(defn mung
   "mung the word to produce a key, alphabetaical"
+  [w]
 ;;Todo all to lowercase
   (apply-str (sort w)))
 
@@ -24,15 +27,14 @@
 (defn find-match
   "Returns function which takes vector and test word add if match."
   [word]
-  (let [mword (mung word)] 
-    #(if (= mword (mung %2)) (conj % %2) %)))
+  (let [munged-word (mung word)] 
+    #(if (= munged-word (mung %2)) (conj % %2) %)))
 
 (defn -main
-  "Find anigrams"
+  "Find anigrams first argument wordfile second argument letters"
   [& args]
-  (println (let [key (second args)
-                 wordfile (first args)
-                 words (get-words wordfile)
-                 matches []
-                 matcher (find-match key)]
-             (reduce matcher matches words))))
+  (let [key (second args)
+        wordfile (first args)
+        words (get-words wordfile)
+        matcher (find-match key)]
+    (println (reduce matcher [] words))))
