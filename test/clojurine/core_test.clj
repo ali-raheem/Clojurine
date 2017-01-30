@@ -12,7 +12,7 @@
 
 (deftest mung-test
   (testing "mung"
-    (is (= "Ail" (mung "Ali")))))
+    (is (= "ail" (mung "Ali")))))
 
 (deftest filter-non-letter-test
   (testing "filter-non-letter"

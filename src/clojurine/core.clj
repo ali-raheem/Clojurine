@@ -15,7 +15,7 @@
   "mung the word to produce a key, alphabetaical"
   [w]
 ;;Todo all to lowercase
-  (apply-str (sort w)))
+  (.toLowerCase (apply-str (sort w))))
 
 (defn get-words
   "Read wordlist into vector."
@@ -28,7 +28,7 @@
   "Returns function which takes vector and test word add if match."
   [word]
   (let [munged-word (mung word)] 
-    #(if (= munged-word (mung %2)) (conj % %2) %)))
+    (fn [matches match-word] (if (= munged-word (mung match-word)) (conj matches match-word) matches))))
 
 (defn -main
   "Find anigrams first argument wordfile second argument letters"
