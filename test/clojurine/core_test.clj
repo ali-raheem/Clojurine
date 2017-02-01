@@ -19,9 +19,11 @@
     (is (= '(\A \l \i) (filter-non-letter "Ali555%")))))
 
 (deftest find-match-test
-  (testing "find-match"
-    (is (=  ((find-match "Ali") [] "Ali") ["Ali"]))))
+  (testing "add-match ail = Ali"
+    (is (=  ((add-match "ail") [] "Ali") ["Ali"])))
+  (testing "add-match Ail = Ali"
+    (is (=  ((add-match "Ail") [] "Ali") ["Ali"])))
+  (testing "add-match Ali = Ali"
+    (is (=  ((add-match "Ali") [] "Ali") ["Ali"]))))
 
-(deftest find-match-case-test
-  (testing "find-match case-test"
-    (is (=  ((find-match "ila") [] "Ali") ["Ali"]))))
+

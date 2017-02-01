@@ -18,8 +18,7 @@
   (->> w
        sort
        apply-str
-       .toLowerCase
-       ))
+       .toLowerCase))
 
 (defn get-words
   "Read wordlist into vector."
@@ -28,7 +27,7 @@
        slurp
        clojure.string/split-lines))
 
-(defn find-match
+(defn add-match
   "Returns function which takes vector and test word add if match."
   [word]
   (let [munged-word (mung word)] 
@@ -37,11 +36,14 @@
         (conj matches match-word)
         matches))))
 
+(defn find-match
+  [words key]
+  (let [matcher (add-match key)]
+    (reduce matcher [] words)))
+
 (defn -main
   "Find anigrams first argument wordfile second argument letters"
   [& args]
-  (let [key (second args)
-        wordfile (first args)
-        words (get-words wordfile)
-        matcher (find-match key)]
-    (println (reduce matcher [] words))))
+  (let [words (get-words (first args))
+        key (second args)]
+    (println (find-match words key))))
