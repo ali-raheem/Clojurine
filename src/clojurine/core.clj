@@ -1,4 +1,5 @@
 (ns clojurine.core
+  (:require [clojure.string :as str])
   (:gen-class))
 
 (defn filter-non-letter
@@ -18,14 +19,14 @@
   (->> w
        sort
        apply-str
-       .toLowerCase))
+       str/lower-case))
 
 (defn get-words
   "Read wordlist into vector."
   [wordfile]
   (->> wordfile
        slurp
-       clojure.string/split-lines))
+       str/split-lines))
 
 (defn add-match
   "Returns function which takes vector and test word add if match."
@@ -38,8 +39,8 @@
 
 (defn find-match
   [words key]
-  (let [matcher (add-match key)]
-    (reduce matcher [] words)))
+  (let [matcher (add-match (mung key))]
+    (reduce matcher []  words)))
 
 (defn -main
   "Find anigrams first argument wordfile second argument letters"
